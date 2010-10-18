@@ -40,6 +40,9 @@ appropriate values from host-specific config file.
 
 Loading of configuration is as simple as this:
 
+    // Presuming that node-config sits under ./external folder in the project
+    require.paths.unshift('./external');
+
     var conf = require('node-config'),
         sys = require('sys');
 
@@ -56,7 +59,7 @@ Loading of configuration is as simple as this:
         }
     );
 
-## Requirement
+## Setup
 
 You need to have a `conf` directory in your project root folder (where your
 main .js file sits), and it has to contain`common.js` file with following
@@ -70,3 +73,7 @@ format:
 
 If you wish to add host-specific config files, execute `hostname` from command
 line to find out what your hostname is and name your file accordingly.
+
+Please see `node-config/conf/*` and `node-config/test.js` for examples.
+
+Thanks!
