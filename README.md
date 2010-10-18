@@ -55,3 +55,18 @@ Loading of configuration is as simple as this:
             console.log(conf.db_connection);
         }
     );
+
+## Requirement
+
+You need to have a `conf` directory in your project root folder (where your
+main .js file sits), and it has to contain`common.js` file with following
+format:
+    
+    exports.conf = {
+        name: 'value',
+        // ...
+        name_m: 'value M'
+    };
+
+If you wish to add host-specific config files, execute `hostname` from command
+line to find out what your hostname is and name your file accordingly.
