@@ -1,8 +1,10 @@
+## Description
 Lightweight configuration engine for node.js
 
 Allows you to have a common configuration file with an ability to override particular
 settings in host-specific configuratin files.
 
+## How it works
 For example, name of your application stays the same, i.e.
 
 conf/common.js:
@@ -33,6 +35,8 @@ hostnames.
 
 Node-config will load common configuration values and then override them with
 appropriate values from host-specific config file.
+
+## Example
 
 Loading of configuration is as simple as this:
 
