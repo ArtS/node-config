@@ -44,7 +44,7 @@ function _initInternal(hostname, callback) {
         conf = require(conf_path).conf;
         _processProperties(conf);
     } catch(err) {
-        sys.log('Unable to locate file ' + common_path);
+        sys.log('Unable to locate file ' + conf_path);
         callback(err);
         return;
     }
