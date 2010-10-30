@@ -5,7 +5,8 @@ Allows you to have a common configuration file with an ability to override parti
 settings in host-specific configuratin files.
 
 ## How it works
-For example, name of your application stays the same, i.e.
+For example, certain settings, like name of your application, does not depend
+on the environment (production/dev/CI), hence never changes:
 
 conf/common.js:
     exports.conf = {
@@ -72,7 +73,7 @@ format:
     };
 
 If you wish to add host-specific config files, execute `hostname` from command
-line to find out what your hostname is and name your file accordingly.
+line to find out what your hostname is and name your config file accordingly.
 
 Please see `node-config/conf/*` and `node-config/test.js` for examples.
 
