@@ -3,8 +3,10 @@ var sys = require('sys'),
     p = require('child_process'),
     path = require('path');
 
-// You can force node-config to pick up config file different to your hostname.
-exports.hostname = null;
+// You can force node-config to pick up config file different to your hostname,
+// by setting .hostname to the name of desired config file (omitting .js), i.e.
+// conf.hostname = 'my-host'; // assuming that ./conf/my-host.js exists
+exports.hostname = null; 
 
 // By default node-config is going to look for 'conf' folder in curent directory.
 // You can change that by changing the currentDirectory property
