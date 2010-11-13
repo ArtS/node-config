@@ -1,0 +1,10 @@
+{
+    "name":         "node-config",
+    "description":  "Lightweight configuration engine for node.js",
+    "author":       "Artem Skvira",
+    "version":      "0.0.1",
+    "engines":      {
+      "node":       ">=0.1.99"
+    },
+    "main" : "./index.js",
+}
