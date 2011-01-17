@@ -13,8 +13,6 @@ function assert(value, message) {
     console.log(message);
 }
 
-conf.hostname = 'hostname';
-
 conf.initConfig(
     function(err) {
         if(err) {
@@ -24,5 +22,6 @@ conf.initConfig(
 
         assert(conf.a == 'a', 'conf.a == a');
         assert(conf.b == 'redefined b', 'conf.b == redefined b');
-    }
+    },
+    'hostname'
 );

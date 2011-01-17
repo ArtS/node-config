@@ -3,11 +3,6 @@ var sys = require('sys'),
     p = require('child_process'),
     path = require('path');
 
-// You can force node-config to pick up config file different to your hostname,
-// by setting .hostname to the name of desired config file (omitting .js), i.e.
-// conf.hostname = 'my-host'; // assuming that ./conf/my-host.js exists
-exports.hostname = null; 
-
 // By default node-config is going to look for 'conf' folder in curent directory.
 // You can change that by changing the currentDirectory property
 exports.currentDirectory = process.cwd();
@@ -38,7 +33,9 @@ function _initInternal(hostname, callback) {
     var conf = null,
        conf_path = null;
 
+    //
     // First of all, retrieve common properties
+    //
     var conf_path = path.join(exports.currentDirectory,
                               'conf', 
                               'common.js');
@@ -51,8 +48,10 @@ function _initInternal(hostname, callback) {
         return;
     }
 
-    // Then load host-specific ones
+    //
+    // Then load host-specific ones.
     // This is optional since there might be no host config.
+    //
     try {
         var conf_path = path.join(exports.currentDirectory,
                                   'conf',
@@ -64,31 +63,39 @@ function _initInternal(hostname, callback) {
     callback(null);
 }
 
-exports.initConfig = function(callback) {
+//
+// You can force node-config to pick up config file different to your hostname,
+// by supplying hostname parameter (omitting .js), i.e.
+//
+// initConfig(myCallback, 'my-host'); // assuming that ./conf/my-host.js exists
+//
+exports.initConfig = function(callback, hostname) {
 
-    // If hostname is set by user, do not invoke the 'hostname' command line tool.
-    // However still behave in async fashion.
-    if(exports.hostname != null) {
+    //
+    // If hostname is set by user, do not invoke the 'hostname'
+    // command line tool. However still behave in the async fashion.
+    //
+    if(hostname) {
         var eventEmitter = new EventEmitter();
         eventEmitter.on('init',
             function() {
-                _initInternal(exports.hostname, callback);
+                _initInternal(hostname, callback);
             }
         );
-        eventEmitter.emit('init');
 
+        eventEmitter.emit('init');
         return;
     }
 
-    // No hostname predefined, obtain hostname andproceed to initialisation.
-    var hostname = p.spawn('hostname');
+    // No hostname supplied, obtain hostname andproceed to initialisation.
+    hostnameProg = p.spawn('hostname');
 
-    hostname.stdout.on('data', function(data) {
+    hostnameProg.stdout.on('data', function(data) {
         var _hostname = String(data).replace('\n', '');
-        _initInternal(_hostname, callback);        
+        _initInternal(_hostname, callback);
     });
 
-    hostname.stderr.on('data', function(data) {
+    hostnameProg.stderr.on('data', function(data) {
         callback(data);
     });
 }
