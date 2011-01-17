@@ -60,6 +60,20 @@ Loading of configuration is as simple as this:
         }
     );
 
+For testing purposes you can override your hostname by supplying second argument 
+to initConfig() function, jsut like that:
+
+    conf.initConfig(
+        function(err) {
+        	// ...
+        },
+        'redefined-host-name'
+    );
+
+which will force node-config to load conf/redefined-host-name.js instead of your
+host-specific config.
+
+
 ## Setup
 
 You need to have a `conf` directory in your project root folder (where your
