@@ -61,12 +61,10 @@ Loading of configuration is as simple as this:
     );
 
 For testing purposes you can override your hostname by supplying second argument 
-to initConfig() function, jsut like that:
+to initConfig() function, just like that:
 
     conf.initConfig(
-        function(err) {
-        	// ...
-        },
+        function(err) { // your normal stuff goes here... },
         'redefined-host-name'
     );
 
