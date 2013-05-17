@@ -5,34 +5,40 @@ Allows you to have a common configuration file with an ability to override parti
 settings in host-specific configuratin files.
 
 ## How it works
-For example, certain settings, like name of your application, does not depend
-on the environment (production/dev/CI), hence never changes:
+For example, certain settings, like name of your application, do not depend on the type 
+of the environment (be it production, dev or CI), and they never, or rarily change:
 
-conf/common.js:
-    exports.conf = {
-        name: 'My Super Awesome Kick Ass Startup'
-    }
+That'd be a name of your company, for example:
 
-but the connection string to the database is different in case of
-CI/Dev/Production machines:
+    //conf/common.js:
+        exports.conf = {
+           name: 'My Super Awesome Kick Ass Startup'
+        }
 
-conf/ci-hostname.js:
-    exports.conf = {
-        db_connection: 'ci.mongo-db.local'
-    }
+But the database connection string on the other hand is a totally different beast:
+Your Continuous Integration server connects to a dedicated DB:
 
-conf/my-dev.js:
-    exports.conf = {
-        db_connection: 'localhost'
-    }
+    //conf/ci-hostname.js:
+        exports.conf = {
+            db_connection: 'db.mongo-db.local'
+        }
 
-conf/linode.beefed-up.server.com.js:
-    exports.conf = {
-        db_connection: 'nosql-super-clustered-cloud-database'
-    }
+while a developer's machine runs a local DB server:
 
-where ci-hostname/my-dev/linode.beefed-up.server.com are corresponding
-hostnames.
+    //conf/my-dev.js:
+        exports.conf = {
+            db_connection: 'localhost'
+        }
+        
+And your awesome production server, the one that actually brings home bacon, uses something completely different:
+
+    //conf/linode.beefed-up.server.com.js:
+        exports.conf = {
+            db_connection: 'nosql-super-clustered-cloud-database'
+        }
+
+So if you want to overwrite a certain setting on a production server with hostname 'linode.beefed-up.server.com',
+you simply create a corresponding file in the 'conf' directory.
 
 Node-config will load common configuration values and then override them with
 appropriate values from host-specific config file.
