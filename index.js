@@ -22,7 +22,7 @@ function _addProperty(property_name, conf) {
 }
 
 function _processProperties(collection) {
-    for(property in collection) {
+    for(var property in collection) {
         if(collection.hasOwnProperty(property)) {
             _addProperty(property, collection);
         }
