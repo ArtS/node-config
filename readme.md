@@ -1,5 +1,5 @@
 ## Description
-Lightweight configuration engine for node.js
+Ultra lightweight configuration engine for node.js
 
 Allows you to have a common configuration file with an ability to override particular
 settings in host-specific configuratin files.
